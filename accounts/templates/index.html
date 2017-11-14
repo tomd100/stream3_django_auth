@@ -11,11 +11,11 @@
     <h1>Main Page</h1>
 
     <ul>
-        {% if request.user.is.authenticated %}
-        <li><a href="#">Logout</a></li>
+        {% if request.user.is_authenticated %}
+            <li><a href="/logout">Logout</a></li>
         {% else %}
-        <li><a href="#">Login</a></li>
-        <li><a href="#">Register</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="#">Register</a></li>
         {% endif %}
     </ul>    
 
