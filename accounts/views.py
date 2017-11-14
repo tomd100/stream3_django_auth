@@ -1,15 +1,20 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from .forms import UserLoginForm, UserRegistrationForm
+from contacts.models import Contact
 
 # Create your views here.
 
 def get_index(request):
-    return render(request, "index.html")
+    if request.user.is_authenticated():
+        contacts = Contact.objects.filter(owner=request.user);
+    else:
+        contacts = [];
+    return render(request, "index.html", {'contacts': contacts});
     
 def logout(request):
     auth.logout(request);
-    return render(request, "index.html")
+    return redirect(get_index);
 
 def login(request):
     if request.method == "POST":
